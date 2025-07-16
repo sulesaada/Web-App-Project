@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drinks Inventory</title>
+
+        <link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head> 
+    <body>
+        <div class= "container-fluid">
+            <h2 class = "text-center alert alert-success">Drinks Depot - Inventory</h2>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class ="col-sm-8">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addDrinkModal" >add Drink</button>
+                    
+                    (%with messages = get_flashed_messages()%)
+                    (%if messages%)
+                    <div class="alert alert-success alert-dismissible"role="alert">
+                        <button type="button" class="close" data-dismiss="alert">aria-label=</"close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                    {%endfor%}
+                    {%endif%}}
+                    {%endwith%}
+
+
+                    <div id = "newDrinkModal" class ="modal fade"= role= "dialog">
+
+                        <div class="modal-dialog">
+                            <div class= "modal-header">
+                                <h4>Enter New Drink</h4>
+                            <div>
+                            <div class="modal-body">
+                                <form action= "{{url_for('insert')}}" method ="POST">
+                                    <div class="form-group">
+                                        <label>     
+                                            Name of Drink 
+                                        </label>
+                                        
+                                        <input type="text" name="name_of_drink" class="form-control" placeholder="Enter Drink Name" required>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label>
+                                            Price
+                                        </label>
+                                        <input type="text" name="price" class="form-control" placeholder="Enter Price" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Quantity Received
+                                        </label>
+                                        <input type="text" name="quantity_received" class="form-control" placeholder="Enter Quantity Received" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Expiry date
+                                        </label>
+                                        <input type="text" name="expiry_date" class="form-control" placeholder="Enter Expiry Date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Batch number
+                                        </label>
+                                        <input type="text" name="date_of_entry" class="form-control" placeholder="Enter Date of Entry" required>
+                                    </div> 
+                                    <button type="submit" class="btn btn-success">Add Drink</button>
+                                </form>
+                            <div>
+                        </div>
+                        <table class = "display" style ="width:100%">
+                            <thead> 
+                                <tr>
+                                    <th>Name </th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Expiry Date</th>
+                                    <th>Batch number</th>
+                                    <th>Drinks subtype</th>
+
+                                </tr>
+                                <tbody>
+                                {% for drink in drinks %}
+                                <tr>
+                                    <td>{{ drink.1 }}</td>
+                                    <td>{{ drink.2 }}</td>
+                                    <td>{{ drink.3 }}</td>
+                                    <td>{{ drink.4 }}</td>
+                                    <td>{{ drink.5 }}</td>
+                                    <td>{{ drink.6 }}</td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                    </div> 
+                </div>
+                
+                
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
